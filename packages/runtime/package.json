@@ -1,6 +1,6 @@
 {
   "name": "cadre-js",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "description": "cadre framework runtime",
   "main": "dist/cadre.js",
   "files": [

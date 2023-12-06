@@ -10,7 +10,7 @@ export function h(tag, props = {}, children = []) {
   return {
     tag,
     props,
-    children: mapTextNodes[withoutNulls(children)],
+    children: mapTextNodes(withoutNulls(children)),
     type: DOM_TYPES.ELEMENT,
   };
 }

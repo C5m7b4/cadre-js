@@ -1,5 +1,5 @@
 import { DOM_TYPES } from './h';
-import { setAttributes } from './events';
+import { setAttributes } from './attributes';
 import { addEventListeners } from './events';
 
 export function mountDom(vdom, parentEl) {
@@ -47,7 +47,7 @@ function createElementNode(vdom, parentEl) {
   addProps(element, props, vdom);
   vdom.el = element;
 
-  children.foeReach((child) => mountDom(child, element));
+  children.forEach((child) => mountDom(child, element));
   parentEl.append(element);
 }
 

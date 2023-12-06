@@ -1,6 +1,6 @@
 import { h, hFragment } from '../h';
 
-export function withourNulls(arr) {
+export function withoutNulls(arr) {
   return arr.filter((item) => item != null);
 }
 
