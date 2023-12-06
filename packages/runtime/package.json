@@ -1,0 +1,28 @@
+{
+  "name": "cadre-js",
+  "version": "0.0.1",
+  "description": "cadre framework runtime",
+  "main": "dist/cadre.js",
+  "files": [
+    "dist/cadre.js"
+  ],
+  "scripts": {
+    "prepack": "npm run build",
+    "build": "rollup -c",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "test":"vitest",
+    "test:run": "vitest run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "jsdom": "^23.0.1",
+    "rollup": "^4.6.1",
+    "rollup-plugin-cleanup": "^3.2.1",
+    "rollup-plugin-filesize": "^10.0.0",
+    "vitest": "^1.0.1"
+  }
+}

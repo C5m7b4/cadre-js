@@ -1,0 +1,14 @@
+{
+  "name": "cadre-project",
+  "version": "0.0.1",
+  "private": true,
+  "description": "a small javascript framework",
+  "main": "index.js",
+  "workspaces": ["packages/runtime"],
+  "scripts": {
+    "serve:examples":"npx http-server . -o ./examples"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

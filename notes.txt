@@ -1,0 +1,15 @@
+sample components
+
+h('form', {class: 'login-form', action: 'login'},[
+  h('input', {type: 'text', name: 'user'}),
+  h('input', {type: 'password', name: 'password'}),
+  h('button', {on: {click: login}}, ['Login'])
+])
+
+h('div', {class: 'message message--info'}, [
+  h('p', {}, ['This is an info message])
+])
+
+function MessageComponent(level, message){
+  return h('div', {class:`message message--${level}`},[message])
+}

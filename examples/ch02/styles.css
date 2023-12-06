@@ -1,0 +1,44 @@
+body {
+  background-color: black;
+  color: #fff;
+}
+
+.todos {
+  width: 60%;
+  margin: 0 auto;
+  border: 2px solid white;
+  border-radius: 15px;
+  padding: 15px 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  background-color: limegreen;
+  border-radius: 8px;
+  height: 40px;
+  padding: 10px 20px;
+  color: #fff;
+  min-width: 100px;
+  cursor: pointer;
+  transition: all 0.4s ease-in;
+}
+
+.btn:disabled {
+  background-color: rgb(38, 54, 38);
+}
+
+.bnt:enabled {
+  background-color: limegreen;
+}
+
+.btn:enabled:hover {
+  background-color: rgb(68, 124, 68);
+}
+
+input {
+  padding: 8px;
+  border-radius: 8px;
+  outline: none;
+  border: 0;
+}
