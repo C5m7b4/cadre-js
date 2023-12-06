@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module">
+    import { createApp, h, hString, hFragment } from 'https://unpkg.com/cadre-js@0.0.6';
+
+
+    const state = { count: 0 }
+
+    const reducers = {
+      add: (state) => ({ count: state.count + 1 }),
+      sub: (state) => ({ count: state.count - 1 })
+    }
+
+    function View(state, emit) {
+      return hFragment([
+        h('button', { on: { click: () => emit('sub') } }, ['-']),
+        h("span", {}, [hString(state.count)]),
+        h('button', { on: { click: () => emit('add') } }, ['+'])
+      ])
+    }
+
+    createApp({ state, view: View, reducers }).mount(document.getElementById('app'))
+  </script>
+  <title>First stab at framework</title>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+
+</html>
