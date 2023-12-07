@@ -4,5 +4,9 @@ export default defineConfig({
   test: {
     reporters: 'verbose',
     environment: 'jsdom',
+    coverage: {
+      provider: 'istanbul',
+      reporter: ['text', 'json', 'html'],
+    },
   },
 });
