@@ -1,23 +1,28 @@
 {
   "name": "cadre-js",
-  "version": "0.0.6",
+  "version": "0.0.13",
   "description": "cadre framework runtime",
   "main": "dist/cadre.js",
   "files": [
-    "dist/cadre.js"
+    "dist/cadre.js",
+    "README.md"
   ],
   "scripts": {
     "prepack": "npm run build",
     "build": "rollup -c",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "test":"vitest",
-    "test:run": "vitest run"
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "view:coverage": "start coverage/index.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@rollup/plugin-json": "^6.0.1",
+    "@vitest/coverage-istanbul": "^1.0.1",
     "eslint": "^8.55.0",
     "jsdom": "^23.0.1",
     "rollup": "^4.6.1",
