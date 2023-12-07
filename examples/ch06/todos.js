@@ -1,4 +1,4 @@
-import { createApp, h, hFragment } from 'https://unpkg.com/cadre-js@0.0.6';
+import { createApp, h, hFragment } from 'https://unpkg.com/cadre-js@0.0.13';
 
 const state = {
   todos: ['Walk the dog', 'Water the plants', 'Sand the chairs'],
@@ -104,9 +104,15 @@ function TodoItem({ todo, i, edit }, emit) {
   return isEditing
     ? h('li', {}, [
         h('input', {
+          type: 'text',
           value: edit.edited,
           on: {
             input: ({ target }) => emit('edit-todo', target.value),
+            keydown: ({ key }) => {
+              if (key === 'Enter') {
+                emit('save-edited-todo');
+              }
+            },
           },
         }),
         h(
