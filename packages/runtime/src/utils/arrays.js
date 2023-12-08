@@ -1,10 +1,10 @@
-import { h, hFragment } from '../h';
+import { h, hFragment } from "../h";
 
 export const ARRAY_DIFF_OP = {
-  ADD: 'add',
-  REMOVE: 'remove',
-  MOVE: 'move',
-  NOOP: 'noop',
+  ADD: "add",
+  REMOVE: "remove",
+  MOVE: "move",
+  NOOP: "noop",
 };
 
 export function withoutNulls(arr) {
@@ -16,7 +16,7 @@ export function lipsum(n) {
   amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
   dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
   laboris nisi ut aliquip ex ea commodo consequat.`;
-  return hFragment(Array(n).fill(h('p', [text])));
+  return hFragment(Array(n).fill(h("p", [text])));
 }
 
 export function arraysDiff(oldArray, newArray) {
@@ -175,7 +175,7 @@ class ArrayWithOriginalIndices {
   removeItemsAfter(index) {
     const operations = [];
 
-    while (this.length > index) {
+    while (this.#array.length > index) {
       operations.push(this.removeItem(index));
     }
 

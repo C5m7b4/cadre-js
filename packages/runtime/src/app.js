@@ -1,7 +1,7 @@
-import { destroyDom } from './destroy-dom.';
-import { Dispatcher } from './dispatcher';
-import { mountDom } from './mount-dom';
-import { patchDom } from './patch-dom';
+import { destroyDom } from "./dom/destroy-dom";
+import { Dispatcher } from "./dispatcher";
+import { mountDom } from "./dom/mount-dom";
+import { patchDom } from "./dom/patch-dom";
 
 export function createApp({ state, view, reducers = {} }) {
   let parentEl = null;
@@ -37,8 +37,8 @@ export function createApp({ state, view, reducers = {} }) {
 
   return {
     mount(_parentEl) {
-      if ( isMounted){
-        throw new Error('The application is already mounted')
+      if (isMounted) {
+        throw new Error("The application is already mounted");
       }
       parentEl = _parentEl;
       vdom = view(state, emit);

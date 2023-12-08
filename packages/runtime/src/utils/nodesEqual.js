@@ -1,4 +1,4 @@
-import { DOM_TYPES } from './h';
+import { DOM_TYPES } from "../h";
 
 export function areNodesEqual(nodeOne, nodeTwo) {
   if (nodeOne.type !== nodeTwo.type) {
