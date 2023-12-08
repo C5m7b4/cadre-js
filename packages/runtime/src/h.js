@@ -1,9 +1,9 @@
-import { withoutNulls } from './utils/arrays';
+import { withoutNulls } from "./utils/arrays";
 
 export const DOM_TYPES = {
-  TEXT: 'text',
-  ELEMENT: 'element',
-  FRAGMENT: 'fragment',
+  TEXT: "text",
+  ELEMENT: "element",
+  FRAGMENT: "fragment",
 };
 
 export function h(tag, props = {}, children = []) {
@@ -17,7 +17,9 @@ export function h(tag, props = {}, children = []) {
 
 export function mapTextNodes(children) {
   return children.map((child) =>
-    typeof child === 'string' ? hString(child) : child
+    typeof child === "string" || typeof child === "number"
+      ? hString(child)
+      : child
   );
 }
 
