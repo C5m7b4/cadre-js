@@ -1,6 +1,7 @@
 import { DOM_TYPES } from "../h";
 import { setAttributes } from "../props/attributes";
 import { addEventListeners } from "../props/events";
+import { extractPropsAndEvents } from "../utils/props";
 
 export function mountDom(vdom, parentEl, index, hostComponent = null) {
   switch (vdom.type) {
@@ -16,6 +17,11 @@ export function mountDom(vdom, parentEl, index, hostComponent = null) {
 
     case DOM_TYPES.FRAGMENT: {
       createFragmentNode(vdom, parentEl, index, hostComponent);
+      break;
+    }
+
+    case DOM_TYPES.COMPONENT: {
+      createComponentNode(vdom, parentEl, index, hostComponent);
       break;
     }
 
@@ -64,19 +70,29 @@ function createFragmentNode(vdom, parentEl, index, hostComponent) {
 }
 
 function createElementNode(vdom, parentEl, index, hostComponent) {
-  const { tag, props, children } = vdom;
+  const { tag, children } = vdom;
 
   const element = document.createElement(tag);
-  addProps(element, props, vdom, hostComponent);
+  addProps(element, vdom, hostComponent);
   vdom.el = element;
 
   children.forEach((child) => mountDom(child, element, null, hostComponent));
   insert(element, parentEl, index);
 }
 
-function addProps(el, props, vdom, hostComponent) {
-  const { on: event, ...attrs } = props;
+function addProps(el, vdom, hostComponent) {
+  const { props: attrs, events } = extractPropsAndEvents(vdom);
 
-  vdom.listeners = addEventListeners(event, el, hostComponent);
+  vdom.listeners = addEventListeners(events, el, hostComponent);
   setAttributes(el, attrs);
+}
+
+function createComponentNode(vdom, parentEl, index, hostComponent) {
+  const Component = vdom.tag;
+  const { props, events } = extractPropsAndEvents(vdom);
+  const component = new Component(props, events, hostComponent);
+
+  component.mount(parentEl, index);
+  vdom.component = component;
+  vdom.el = component.firstElement;
 }

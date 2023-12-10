@@ -16,7 +16,12 @@ export function destroyDom(vdom) {
     }
 
     case DOM_TYPES.FRAGMENT: {
-      removeFragmentNode(vdom);
+      removeFragmentNodes(vdom);
+      break;
+    }
+
+    case DOM_TYPES.COMPONENT: {
+      vdom.component.unmount();
       break;
     }
 
@@ -44,7 +49,7 @@ function removeElementNode(vdom) {
   }
 }
 
-function removeFragmentNode(vdom) {
+function removeFragmentNodes(vdom) {
   const { children } = vdom;
   children.forEach(destroyDom);
 }

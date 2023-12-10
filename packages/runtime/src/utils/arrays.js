@@ -86,7 +86,7 @@ class ArrayWithOriginalIndices {
       this.#equalsFn(item, newItem)
     );
 
-    return indexInNewArray;
+    return indexInNewArray === -1;
   }
 
   removeItem(index) {
@@ -127,7 +127,7 @@ class ArrayWithOriginalIndices {
   }
 
   isAddition(item, fromIdx) {
-    return this.findIndexFrom(item, fromIdx);
+    return this.findIndexFrom(item, fromIdx) === -1;
   }
 
   findIndexFrom(item, fromIndex) {

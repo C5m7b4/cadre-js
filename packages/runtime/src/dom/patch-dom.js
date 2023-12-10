@@ -12,6 +12,7 @@ import { objectsDiff } from "../utils/objects";
 import { arraysDiff, arraysDiffSequence, ARRAY_DIFF_OP } from "../utils/arrays";
 import { isNotBlankOrEmptyString } from "../utils/strings";
 import { addEventListener } from "../props/events";
+import { extractPropsAndEvents } from "../utils/props";
 
 export function patchDom(oldVdom, newVdom, parentEl, hostComponent = null) {
   if (!areNodesEqual(oldVdom, newVdom)) {
@@ -32,6 +33,11 @@ export function patchDom(oldVdom, newVdom, parentEl, hostComponent = null) {
 
     case DOM_TYPES.ELEMENT: {
       patchElement(oldVdom, newVdom, hostComponent);
+      break;
+    }
+
+    case DOM_TYPES.COMPONENT: {
+      patchComponent(oldVdom, newVdom);
       break;
     }
   }
@@ -59,6 +65,16 @@ function patchText(oldVdom, newVdom) {
   }
 }
 
+function patchComponent(oldVdom, newVdom) {
+  const { component } = oldVdom;
+  const { props } = extractPropsAndEvents(newVdom);
+
+  component.updateProps(props);
+
+  newVdom.component = component;
+  newVdom.el = component.firstElement;
+}
+
 function patchElement(oldVdom, newVdom, hostComponent) {
   const el = oldVdom.el;
   const {
@@ -69,7 +85,7 @@ function patchElement(oldVdom, newVdom, hostComponent) {
   } = oldVdom.props;
   const {
     class: newClass,
-    stle: newStyle,
+    style: newStyle,
     on: newEvents,
     ...newAttrs
   } = newVdom.props;
@@ -182,18 +198,13 @@ function patchChildren(oldVdom, newVdom, hostComponent) {
         break;
       }
       case ARRAY_DIFF_OP.MOVE: {
-        // const oldChild = oldChildren[originalIndex];
-        // const newChild = newChildren[index];
+        const oldChild = oldChildren[originalIndex];
+        const newChild = newChildren[index];
         const el = oldChild.el;
         const elAtTargetIndex = parentEl.childNodes[index + offset];
 
         parentEl.insertBefore(el, elAtTargetIndex);
-        patchDom(
-          oldChildren[from],
-          newChildren[index],
-          parentEl,
-          hostComponent
-        );
+        patchDom(oldChild, newChild, parentEl, hostComponent);
         break;
       }
       case ARRAY_DIFF_OP.NOOP: {
