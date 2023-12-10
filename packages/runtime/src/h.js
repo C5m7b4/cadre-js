@@ -4,14 +4,17 @@ export const DOM_TYPES = {
   TEXT: "text",
   ELEMENT: "element",
   FRAGMENT: "fragment",
+  COMPONENT: "component",
 };
 
 export function h(tag, props = {}, children = []) {
+  const type =
+    typeof tag === "string" ? DOM_TYPES.ELEMENT : DOM_TYPES.COMPONENT;
   return {
     tag,
     props,
+    type,
     children: mapTextNodes(withoutNulls(children)),
-    type: DOM_TYPES.ELEMENT,
   };
 }
 
@@ -28,6 +31,7 @@ export function hString(str) {
 }
 
 export function hFragment(vNodes) {
+  assert(Array.isArray(vNodes), "hFragment expects an array of vNodes");
   return {
     type: DOM_TYPES.FRAGMENT,
     children: mapTextNodes(withoutNulls(vNodes)),
@@ -50,4 +54,10 @@ export function extractChildren(vdom) {
   }
 
   return children;
+}
+
+function assert(condition, message = "Assertion faile") {
+  if (!condition) {
+    throw new Error(message);
+  }
 }
